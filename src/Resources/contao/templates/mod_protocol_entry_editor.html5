@@ -1,0 +1,9 @@
+<?php $this->extend('block_searchable'); ?>
+
+<?php $this->block('content'); ?>
+    <?php if (\HeimrichHannot\StatusMessages\StatusMessage::isEmpty($this->id)): ?>
+        <?= $this->form; ?>
+    <?php else: ?>
+        <?= \HeimrichHannot\StatusMessages\StatusMessage::generate($this->id) ?>
+    <?php endif; ?>
+<?php $this->endblock(); ?>
