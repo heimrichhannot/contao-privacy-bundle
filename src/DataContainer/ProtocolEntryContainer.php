@@ -8,6 +8,7 @@
 
 namespace HeimrichHannot\PrivacyBundle\DataContainer;
 
+use Contao\Config;
 use Contao\Controller;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\Database;
@@ -98,7 +99,7 @@ class ProtocolEntryContainer
         }
 
         return '<div class="tl_content_left">'.$title.' <span style="color:#b3b3b3; padding-left:3px">['.\Date::parse(
-                \Config::get('datimFormat'),
+                Config::get('datimFormat'),
                 trim($row['dateAdded'])
             ).']</span></div>';
     }

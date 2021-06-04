@@ -1,0 +1,46 @@
+{% extends "@ContaoCore/Backend/be_page.html.twig" %}
+
+{% block headline %}
+    Opt-In
+{% endblock %}
+
+{% block error %}{% endblock %}
+
+{% block main %}
+    <div class="tl_message">
+        {{ message|raw }}
+    </div>
+    <div id="privacy_opt_in" class="list_view">
+        <div id="tl_buttons">
+            <a href="{{ href }}" class="header_back" title="{{ title }}" accesskey="b" onclick="Backend.getScrollOffset()">{{ button }}</a>
+        </div>
+
+        <form action="{{ formAction }}" method="post" class="tl_form tl_edit_form">
+            <div class="tl_formbody_edit">
+                <input type="hidden" name="do" value="privacy_opt_in">
+                <input type="hidden" name="nb" value="1">
+                <input type="hidden" name="ref" value="{{ refererId }}">
+                <input type="hidden" name="FORM_SUBMIT" value="tl_privacy_backend">
+                <input type="hidden" name="REQUEST_TOKEN" value="{{ requestToken }}">
+
+                <fieldset id="pal_email_legend" class="tl_box">
+                    <legend>{{ 'huh.privacy.misc.config_legend'|trans }}</legend>
+
+                    {% for field in fields %}
+                        <div class="widget">
+                            {{ field|raw }}
+                        </div>
+                    {% endfor %}
+                </fieldset>
+
+                <div class="tl_formbody_submit">
+                    <div class="tl_submit_container">
+                        <button onclick="if(!confirm('{{ 'huh.privacy.message.confirm_opt_in_email'|trans }}'))return false;Backend.getScrollOffset()" type="submit" class="tl_submit" accesskey="s">
+                            {{ 'huh.privacy.misc.send'|trans }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

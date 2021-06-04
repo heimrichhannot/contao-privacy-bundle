@@ -46,7 +46,7 @@ class ReplaceInsertTagsListener
                 }
 
                 $jumpTo = isset($tagArray[2]) ? $tagArray[2] : null;
-                $url = $this->urlUtil->getJumpToPageUrl($jumpTo);
+                $url = $this->urlUtil->getJumpToPageObject($jumpTo)->getAbsoluteUrl();
 
                 $token = [
                     'data' => $data,

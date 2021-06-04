@@ -1,0 +1,7 @@
+huh:
+  privacy:
+    message:
+      confirm_opt_in_email: Möchten Sie wirklich an die eingegebene E-Mail-Adresse eine E-Mail zur Werbeeinwilligung senden? Haben Sie dafür die Einwilligung der Person?
+    misc:
+      config_legend: Konfiguration
+      send: Senden

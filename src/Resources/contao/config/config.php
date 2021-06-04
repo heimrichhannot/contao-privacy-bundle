@@ -8,13 +8,8 @@ array_insert(
     1,
     [
         'privacy' => [
-            'privacy_opt_in' => [
-                'callback' => 'HeimrichHannot\PrivacyBundle\Module\ModuleBackendOptIn',
-                'icon'     => 'system/modules/privacy/assets/img/icon_email.png',
-            ],
             'protocols'      => [
                 'tables' => ['tl_privacy_protocol_archive', 'tl_privacy_protocol_entry'],
-                'icon'   => 'system/modules/privacy/assets/img/icon_protocol.png',
             ],
         ],
     ]

@@ -1,0 +1,7 @@
+huh:
+  privacy:
+    message:
+      confirm_opt_in_email: Vuoi veramente inviare una e-mail di richiesta di consenso pubblicitario all'indirizzo e-mail inserito? Hai il consenso della persona?
+    misc:
+      config_legend: Configurazione
+      send: Invia

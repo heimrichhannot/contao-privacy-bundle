@@ -11,6 +11,5 @@ $lang['language'][1] = 'Wählen Sie hier die Sprache aus, in der die Benachricht
 /**
  * Misc
  */
-$lang['send'] = 'Senden';
 $lang['emailSentSuccessfully'] = 'Die Opt-in-E-Mail wurde erfolgreich an "%s" verschickt.';
 $lang['invalidEmail'] = 'Ihre Eingabe "%s" ist keine valide E-Mail-Adresse.';

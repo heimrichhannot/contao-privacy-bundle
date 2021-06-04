@@ -11,6 +11,5 @@ $lang['language'][1] = 'Seleziona qui la lingua in cui deve essere inviata la no
 /**
  * Misc
  */
-$lang['send'] = 'Invia';
 $lang['emailSentSuccessfully'] = 'L\'email di Opt-In è stata inviata correttamente a "% s".';
 $lang['invalidEmail'] = 'L\'indirizzo "%s" che hai inserito non è un indirizzo E-Mail valido.';

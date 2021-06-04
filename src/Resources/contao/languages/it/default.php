@@ -31,14 +31,8 @@ $lang['optOutSuccessful']                 = 'La cancellazione è avvenuta con su
 $lang['optOutFailed']                     = 'La cancellazione non ha avuto successo. Si prega di verificare di aver inserito correttamente il link.';
 $lang['optOutFailedNoToken']              = 'La cancellazione non ha avuto successo. Non è stato trovato nessun token di logoff.';
 $lang['alreadyOptedOut']                  = 'Sei già disconnesso e quindi non riceverai più alcuna e-mail da noi.';
-$lang['confirmOptInEmail']                = 'Vuoi veramente inviare una e-mail di richiesta di consenso pubblicitario all\'indirizzo e-mail inserito? Hai il consenso della persona?';
 $lang['messageNoJwtToken']                = 'Non è stato trovato alcun token. Hai scritto in modo errato?';
 $lang['messageNoBackendOptInConfigFound'] = 'Non è stata trovata alcuna configurazione di opt-in nel back-end per la lingua selezionata. Creala nelle impostazioni di Contao alla voce "Notifiche (back-end opt-in)".';
-
-/**
- * Misc
- */
-$lang['config_legend'] = 'Configurazione';
 
 /**
  * Reference

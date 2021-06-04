@@ -11,7 +11,7 @@ Use this bundle at your own risk. Although we as the developer try our best to d
 - privacy protocol
     - adds the new Contao entities `tl_privacy_protocol_archive` and `tl_privacy_protocol_entry` for storing privacy relevant actions like opt-ins, ...
     - offers a simply API for adding new entries into the privacy protocol
-    - offers functionality to create new privacy protocol entries for `tl_member` callbacks (`oncreate_callback`, `onversion_callback`, `ondelete_callback`)
+    - offers functionality to create new privacy protocol entries for dca callbacks (`oncreate_callback`, `onversion_callback`, `ondelete_callback`)
 - opt-in/out form for the frontend with connection to privacy protocol
 - backend opt in email module for "inviting" users to opt into a privacy relevant agreement
 
