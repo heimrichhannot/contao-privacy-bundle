@@ -21,8 +21,8 @@ array_insert(
 );
 
 if (class_exists('\HeimrichHannot\ContaoExporterBundle\HeimrichHannotContaoExporterBundle')) {
-    $GLOBALS['BE_MOD']['privacy']['protocols']['export_csv'] = System::getContainer()->get('huh.exporter.action.backendexport')->getBackendModule();
-    $GLOBALS['BE_MOD']['privacy']['protocols']['export_xls'] = System::getContainer()->get('huh.exporter.action.backendexport')->getBackendModule();
+    $GLOBALS['BE_MOD']['privacy']['protocols']['export_csv'] = ['huh.exporter.action.backendexport', 'export'];
+    $GLOBALS['BE_MOD']['privacy']['protocols']['export_xls'] = ['huh.exporter.action.backendexport', 'export'];
 }
 
 /**
@@ -30,11 +30,6 @@ if (class_exists('\HeimrichHannot\ContaoExporterBundle\HeimrichHannotContaoExpor
  */
 $GLOBALS['TL_MODELS']['tl_privacy_protocol_archive'] = 'HeimrichHannot\PrivacyBundle\Model\ProtocolArchiveModel';
 $GLOBALS['TL_MODELS']['tl_privacy_protocol_entry']   = 'HeimrichHannot\PrivacyBundle\Model\ProtocolEntryModel';
-
-/**
- * Hooks
- */
-$GLOBALS['TL_HOOKS']['replaceInsertTags']['privacy_addInsertTags']         = ['HeimrichHannot\PrivacyBundle\EventListener\HookListener', 'addInsertTags'];
 
 /**
  * Notifications

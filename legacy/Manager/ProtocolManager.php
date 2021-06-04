@@ -1,6 +1,6 @@
 <?php
 
-namespace HeimrichHannot\Privacy;
+namespace HeimrichHannot\Privacy\Manager;
 
 use Contao\ContentElement;
 use Contao\System;

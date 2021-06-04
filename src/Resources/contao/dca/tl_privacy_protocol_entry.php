@@ -66,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_privacy_protocol_entry'] = [
         'dateAdded'               => [
             'label'     => &$GLOBALS['TL_LANG']['tl_privacy_protocol_entry']['dateAdded'],
             'sorting'   => true,
-            'flag'      => 7,
+            'flag'      => 8,
             'inputType' => 'text',
             'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'timepicker' => true, 'doNotCopy' => true, 'mandatory' => true, 'tl_class' => 'w50'],
             'sql'       => "varchar(64) NOT NULL default ''",
@@ -327,15 +327,15 @@ $GLOBALS['TL_DCA']['tl_privacy_protocol_entry'] = [
 \HeimrichHannot\Haste\Dca\General::addAuthorFieldAndCallback('tl_privacy_protocol_entry');
 
 
-if (class_exists('HeimrichHannot\Exporter\ModuleExporter')) {
-    $GLOBALS['TL_DCA']['tl_privacy_protocol_entry']['list']['global_operations']['export_csv'] = \HeimrichHannot\Exporter\ModuleExporter::getGlobalOperation(
+if (class_exists('\HeimrichHannot\ContaoExporterBundle\HeimrichHannotContaoExporterBundle')) {
+    $backendExportAction = System::getContainer()->get('huh.exporter.action.backendexport');
+
+    $GLOBALS['TL_DCA']['tl_privacy_protocol_entry']['list']['global_operations']['export_csv'] = $backendExportAction->getGlobalOperation(
         'export_csv',
-        $GLOBALS['TL_LANG']['MSC']['export_csv'],
-        'system/modules/exporter/assets/img/icon_export.png'
+        $GLOBALS['TL_LANG']['MSC']['export_csv']
     );
-    $GLOBALS['TL_DCA']['tl_privacy_protocol_entry']['list']['global_operations']['export_xls'] = \HeimrichHannot\Exporter\ModuleExporter::getGlobalOperation(
+    $GLOBALS['TL_DCA']['tl_privacy_protocol_entry']['list']['global_operations']['export_xls'] = $backendExportAction->getGlobalOperation(
         'export_xls',
-        $GLOBALS['TL_LANG']['MSC']['export_xls'],
-        'system/modules/exporter/assets/img/icon_export.png'
+        $GLOBALS['TL_LANG']['MSC']['export_xls']
     );
 }

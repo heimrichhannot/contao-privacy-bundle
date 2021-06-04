@@ -62,7 +62,7 @@ class ProtocolArchiveContainer
         );
 
         if ($includeAdditionalFields) {
-            $fields = $this->dcaUtil->getFields(
+            $fields += $this->dcaUtil->getFields(
                 'tl_privacy_protocol_entry',
                 [
                     'evalConditions' => [
@@ -71,6 +71,8 @@ class ProtocolArchiveContainer
                 ]
             );
         }
+
+        asort($fields);
 
         return $fields;
     }

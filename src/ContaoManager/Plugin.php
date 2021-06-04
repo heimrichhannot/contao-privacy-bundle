@@ -25,6 +25,9 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface
     {
         return [
             BundleConfig::create(HeimrichHannotPrivacyBundle::class)->setLoadAfter([
+                'formhybrid',
+                'HeimrichHannot\ContaoExporterBundle\HeimrichHannotContaoExporterBundle',
+                'notification_center',
                 ContaoCoreBundle::class,
             ]),
         ];
