@@ -8,7 +8,7 @@
     "contao/core-bundle": "^4.9",
     "heimrichhannot/contao-utils-bundle": "^2.191",
     "heimrichhannot/contao-be_explanation-bundle": "^2.3",
-    "heimrichhannot/contao-formhybrid": "^3.17",
+    "heimrichhannot/contao-formhybrid": "^3.18",
     "firebase/php-jwt": "^v4.0"
   },
   "require-dev": {
