@@ -19,7 +19,10 @@ use HeimrichHannot\UtilsBundle\Url\UrlUtil;
  */
 class ReplaceInsertTagsListener
 {
-    protected UrlUtil $urlUtil;
+    /**
+     * @var UrlUtil
+     */
+    protected $urlUtil;
 
     public function __construct(UrlUtil $urlUtil)
     {

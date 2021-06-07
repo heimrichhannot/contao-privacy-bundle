@@ -31,10 +31,20 @@ class ProtocolEntryEditorModuleController extends AbstractFrontendModuleControll
 {
     const TYPE = 'protocol_entry_editor';
 
-    protected ModelUtil $modelUtil;
+    /**
+     * @var ModelUtil
+     */
+    protected $modelUtil;
 
-    protected \HeimrichHannot\RequestBundle\Component\HttpFoundation\Request $request;
-    protected ContaoFramework                                                $framework;
+    /**
+     * @var \HeimrichHannot\RequestBundle\Component\HttpFoundation\Request
+     */
+    protected $request;
+
+    /**
+     * @var ContaoFramework
+     */
+    protected $framework;
 
     public function __construct(
         ModelUtil $modelUtil,

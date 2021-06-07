@@ -53,8 +53,16 @@ class ProtocolEntryContainer
         self::CMS_SCOPE_BACKEND,
         self::CMS_SCOPE_FRONTEND,
     ];
-    protected DcaUtil  $dcaUtil;
-    protected FormUtil $formUtil;
+
+    /**
+     * @var DcaUtil
+     */
+    protected $dcaUtil;
+
+    /**
+     * @var FormUtil
+     */
+    protected $formUtil;
 
     public function __construct(DcaUtil $dcaUtil, FormUtil $formUtil)
     {
@@ -264,7 +272,7 @@ class ProtocolEntryContainer
 
                 break;
 
-             case 'select':
+            case 'select':
                 if (!\in_array($id, $root)) {
                     throw new \Exception('Not enough permissions to access privacy_protocol_entry archive ID '.$id.'.');
                 }

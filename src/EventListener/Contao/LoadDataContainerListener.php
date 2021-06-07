@@ -22,12 +22,23 @@ use HeimrichHannot\UtilsBundle\Model\ModelUtil;
  */
 class LoadDataContainerListener
 {
-    protected ContainerUtil $containerUtil;
-
     protected static $callbacks;
     protected static $setCallbacks = [];
-    protected ModelUtil       $modelUtil;
-    protected ProtocolManager $protocolManager;
+
+    /**
+     * @var ContainerUtil
+     */
+    protected $containerUtil;
+
+    /**
+     * @var ModelUtil
+     */
+    protected $modelUtil;
+
+    /**
+     * @var ProtocolManager
+     */
+    protected $protocolManager;
 
     public function __construct(ContainerUtil $containerUtil, ModelUtil $modelUtil, ProtocolManager $protocolManager)
     {

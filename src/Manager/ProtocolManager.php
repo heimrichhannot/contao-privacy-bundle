@@ -28,10 +28,25 @@ use HeimrichHannot\UtilsBundle\String\StringUtil;
 
 class ProtocolManager
 {
-    protected DcaUtil      $dcaUtil;
-    protected StringUtil   $stringUtil;
-    protected ProtocolUtil $protocolUtil;
-    protected ModelUtil    $modelUtil;
+    /**
+     * @var DcaUtil
+     */
+    protected $dcaUtil;
+
+    /**
+     * @var StringUtil
+     */
+    protected $stringUtil;
+
+    /**
+     * @var ProtocolUtil
+     */
+    protected $protocolUtil;
+
+    /**
+     * @var ModelUtil
+     */
+    protected $modelUtil;
 
     public function __construct(
         DcaUtil $dcaUtil,

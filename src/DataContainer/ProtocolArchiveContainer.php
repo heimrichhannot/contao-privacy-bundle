@@ -17,7 +17,10 @@ use HeimrichHannot\UtilsBundle\Dca\DcaUtil;
 
 class ProtocolArchiveContainer
 {
-    protected DcaUtil $dcaUtil;
+    /**
+     * @var DcaUtil
+     */
+    protected $dcaUtil;
 
     public function __construct(DcaUtil $dcaUtil)
     {

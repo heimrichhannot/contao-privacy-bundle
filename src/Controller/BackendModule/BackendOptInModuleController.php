@@ -34,9 +34,24 @@ use Twig\Environment as TwigEnvironment;
  */
 class BackendOptInModuleController extends AbstractController
 {
-    protected ContaoFramework $framework;
-    protected Request         $request;
-    protected SalutationUtil  $salutationUtil;
+    /**
+     * @var ContaoFramework
+     */
+    protected $framework;
+
+    /**
+     * @var Request
+     */
+    protected $request;
+
+    /**
+     * @var SalutationUtil
+     */
+    protected $salutationUtil;
+
+    /**
+     * @var TwigEnvironment
+     */
     private $twig;
 
     public function __construct(TwigEnvironment $twig, ContaoFramework $framework, Request $request, SalutationUtil $salutationUtil)

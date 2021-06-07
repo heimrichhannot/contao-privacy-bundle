@@ -16,9 +16,20 @@ use HeimrichHannot\UtilsBundle\Model\ModelUtil;
 
 class ProtocolConfigContainer
 {
-    protected DcaUtil         $dcaUtil;
-    protected ModelUtil       $modelUtil;
-    protected ProtocolManager $protocolManager;
+    /**
+     * @var DcaUtil
+     */
+    protected $dcaUtil;
+
+    /**
+     * @var ModelUtil
+     */
+    protected $modelUtil;
+
+    /**
+     * @var ProtocolManager
+     */
+    protected $protocolManager;
 
     public function __construct(ProtocolManager $protocolManager, DcaUtil $dcaUtil, ModelUtil $modelUtil)
     {

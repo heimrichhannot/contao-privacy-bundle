@@ -4,7 +4,7 @@
   "description": "This bundle contains functionality concerning privacy and the European Union's \"General Data Protection Regulation\" (GDPR).",
   "license": "LGPL-3.0-or-later",
   "require": {
-    "php": "^7.4",
+    "php": "^7.2",
     "contao/core-bundle": "^4.9",
     "heimrichhannot/contao-utils-bundle": "^2.191",
     "heimrichhannot/contao-be_explanation-bundle": "^2.3",
