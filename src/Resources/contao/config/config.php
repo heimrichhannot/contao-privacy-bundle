@@ -9,7 +9,7 @@ array_insert(
     [
         'privacy' => [
             'protocols'      => [
-                'tables' => ['tl_privacy_protocol_archive', 'tl_privacy_protocol_entry'],
+                'tables' => ['tl_privacy_protocol_archive', 'tl_privacy_protocol_entry', 'tl_privacy_protocol_config'],
             ],
         ],
     ]
@@ -25,6 +25,7 @@ if (class_exists('\HeimrichHannot\ContaoExporterBundle\HeimrichHannotContaoExpor
  */
 $GLOBALS['TL_MODELS']['tl_privacy_protocol_archive'] = 'HeimrichHannot\PrivacyBundle\Model\ProtocolArchiveModel';
 $GLOBALS['TL_MODELS']['tl_privacy_protocol_entry']   = 'HeimrichHannot\PrivacyBundle\Model\ProtocolEntryModel';
+$GLOBALS['TL_MODELS']['tl_privacy_protocol_config']   = 'HeimrichHannot\PrivacyBundle\Model\ProtocolConfigModel';
 
 /**
  * Notifications

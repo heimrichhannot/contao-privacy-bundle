@@ -59,3 +59,4 @@ $lang['copy']   = ['Protokollarchiv duplizieren', 'Protokollarchiv ID %s duplizi
 $lang['delete'] = ['Protokollarchiv löschen', 'Protokollarchiv ID %s löschen'];
 $lang['toggle'] = ['Protokollarchiv veröffentlichen', 'Protokollarchiv ID %s veröffentlichen/verstecken'];
 $lang['show']   = ['Protokollarchiv Details', 'Protokollarchiv-Details ID %s anzeigen'];
+$lang['config'] = ['Protokollkonfigurationen', 'Konfigurationen zum Anlegen von Protokolleinträgen anzeigen'];

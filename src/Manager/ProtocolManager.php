@@ -9,7 +9,6 @@
 namespace HeimrichHannot\PrivacyBundle\Manager;
 
 use Contao\BackendUser;
-use Contao\ContentElement;
 use Contao\Controller;
 use Contao\Database;
 use Contao\DataContainer;
@@ -24,6 +23,7 @@ use HeimrichHannot\PrivacyBundle\Model\ProtocolArchiveModel;
 use HeimrichHannot\PrivacyBundle\Model\ProtocolEntryModel;
 use HeimrichHannot\PrivacyBundle\Util\ProtocolUtil;
 use HeimrichHannot\UtilsBundle\Dca\DcaUtil;
+use HeimrichHannot\UtilsBundle\Model\ModelUtil;
 use HeimrichHannot\UtilsBundle\String\StringUtil;
 
 class ProtocolManager
@@ -31,23 +31,34 @@ class ProtocolManager
     protected DcaUtil      $dcaUtil;
     protected StringUtil   $stringUtil;
     protected ProtocolUtil $protocolUtil;
+    protected ModelUtil    $modelUtil;
 
     public function __construct(
         DcaUtil $dcaUtil,
         StringUtil $stringUtil,
-        ProtocolUtil $protocolUtil
+        ProtocolUtil $protocolUtil,
+        ModelUtil $modelUtil
     ) {
         $this->dcaUtil = $dcaUtil;
         $this->stringUtil = $stringUtil;
         $this->protocolUtil = $protocolUtil;
+        $this->modelUtil = $modelUtil;
     }
 
-    public function addEntryFromContentElement($type, $archive, array $data, ContentElement $element, $packageName = '')
+    public function addEntryFromContentElement($type, $archive, array $data, $element, $packageName = '')
     {
         $data['element'] = $element->id;
         $data['elementType'] = $element->type;
 
         $this->addEntry($type, $archive, $data, $packageName);
+    }
+
+    public function addEntryFromContentElementByConfig(int $config, array $data, $element, $packageName = '')
+    {
+        $data['element'] = $element->id;
+        $data['elementType'] = $element->type;
+
+        $this->addEntryByConfig($config, $data, $packageName);
     }
 
     /**
@@ -65,6 +76,15 @@ class ProtocolManager
         $data['moduleName'] = $module->name;
 
         $this->addEntry($type, $archive, $data, $packageName);
+    }
+
+    public function addEntryFromModuleByConfig(int $config, array $data, $module, $packageName = '')
+    {
+        $data['module'] = $module->id;
+        $data['moduleType'] = $module->type;
+        $data['moduleName'] = $module->name;
+
+        $this->addEntryByConfig($config, $data, $packageName);
     }
 
     public function addEntry($type, $archive, array $data, $packageName = '', $skipFields = ['id', 'tstamp', 'dateAdded', 'pid', 'type'])
@@ -290,6 +310,17 @@ class ProtocolManager
         }
 
         return $protocolEntry;
+    }
+
+    public function addEntryByConfig(int $config, array $data, $packageName = '')
+    {
+        if (null === ($config = $this->modelUtil->findModelInstanceByPk('tl_privacy_protocol_config', $config))) {
+            return;
+        }
+
+        $data['description'] = $config->description;
+
+        $this->addEntry($config->entryType, $config->archive, $data, $packageName);
     }
 
     public function updateReferenceEntity($protocolArchive, $data, $editableFields, $context)
@@ -548,6 +579,19 @@ class ProtocolManager
             'eval' => ['fieldType' => 'radio', 'tl_class' => 'w50', 'mandatory' => true],
             'sql' => "int(10) unsigned NOT NULL default '0'",
             'relation' => ['type' => 'hasOne', 'load' => 'lazy'],
+        ];
+    }
+
+    public function getConfigFieldDca()
+    {
+        return [
+            'label' => $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolEntryConfig'],
+            'exclude' => true,
+            'filter' => true,
+            'inputType' => 'select',
+            'foreignKey' => 'tl_privacy_protocol_config.title',
+            'eval' => ['tl_class' => 'w50', 'includeBlankOption' => true, 'chosen' => true],
+            'sql' => "int(10) unsigned NOT NULL default '0'",
         ];
     }
 }

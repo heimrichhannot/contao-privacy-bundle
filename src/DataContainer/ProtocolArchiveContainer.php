@@ -11,6 +11,7 @@ namespace HeimrichHannot\PrivacyBundle\DataContainer;
 use Contao\Controller;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\DataContainer;
+use Contao\RequestToken;
 use Contao\StringUtil;
 use HeimrichHannot\UtilsBundle\Dca\DcaUtil;
 
@@ -215,7 +216,7 @@ class ProtocolArchiveContainer
      */
     public function editHeader($row, $href, $label, $title, $icon, $attributes)
     {
-        return \Contao\BackendUser::getInstance()->canEditFieldsOf('tl_privacy_protocol_archive') ? '<a href="'.Controller::addToUrl($href.'&amp;id='.$row['id']).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.\Image::getHtml($icon, $label).'</a> ' : \Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).' ';
+        return \Contao\BackendUser::getInstance()->canEditFieldsOf('tl_privacy_protocol_archive') ? '<a href="'.Controller::addToUrl($href.'&amp;id='.$row['id']).'&rt='.RequestToken::get().'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.\Image::getHtml($icon, $label).'</a> ' : \Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).' ';
     }
 
     /**
@@ -223,7 +224,7 @@ class ProtocolArchiveContainer
      */
     public function copyArchive($row, $href, $label, $title, $icon, $attributes)
     {
-        return \Contao\BackendUser::getInstance()->hasAccess('create', 'privacy_protocolp') ? '<a href="'.Controller::addToUrl($href.'&amp;id='.$row['id']).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.\Image::getHtml($icon, $label).'</a> ' : \Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).' ';
+        return \Contao\BackendUser::getInstance()->hasAccess('create', 'privacy_protocolp') ? '<a href="'.Controller::addToUrl($href.'&amp;id='.$row['id']).'&rt='.RequestToken::get().'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.\Image::getHtml($icon, $label).'</a> ' : \Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).' ';
     }
 
     /**
@@ -231,6 +232,6 @@ class ProtocolArchiveContainer
      */
     public function deleteArchive($row, $href, $label, $title, $icon, $attributes)
     {
-        return \Contao\BackendUser::getInstance()->hasAccess('delete', 'privacy_protocolp') ? '<a href="'.Controller::addToUrl($href.'&amp;id='.$row['id']).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.\Image::getHtml($icon, $label).'</a> ' : \Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).' ';
+        return \Contao\BackendUser::getInstance()->hasAccess('delete', 'privacy_protocolp') ? '<a href="'.Controller::addToUrl($href.'&amp;id='.$row['id']).'&rt='.RequestToken::get().'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.\Image::getHtml($icon, $label).'</a> ' : \Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).' ';
     }
 }

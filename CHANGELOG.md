@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2021-06-07
+
+- refactored privacy protocol module config to a new entity
+
 ## [1.0.1] - 2021-06-04
 
 - increased formhybrid dep version
