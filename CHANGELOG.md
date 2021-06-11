@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2021-06-11
+
+- fixed null check for non admin users
+
 ## [1.2.0] - 2021-06-07
 
 - reduced the php constraint to 7.2.x

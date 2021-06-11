@@ -33,11 +33,9 @@ class BackendMenuListener
         $factory = $event->getFactory();
         $tree = $event->getTree();
 
-        if ('mainMenu' !== $tree->getName()) {
+        if ('mainMenu' !== $tree->getName() || null === ($privacyNode = $tree->getChild('privacy'))) {
             return;
         }
-
-        $contentNode = $tree->getChild('privacy');
 
         $node = $factory
             ->createItem('privacy_backend_opt_in')
@@ -47,6 +45,6 @@ class BackendMenuListener
             ->setCurrent(BackendOptInModuleController::class === $this->requestStack->getCurrentRequest()->get('_controller'))
         ;
 
-        $contentNode->addChild($node);
+        $privacyNode->addChild($node);
     }
 }
