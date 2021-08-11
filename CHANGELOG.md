@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2021-08-11
+
+- Added: option `other` in gender
+- Added: single opt in option (discouraged!)
+
 ## [1.2.1] - 2021-06-11
 
 - fixed null check for non admin users

@@ -27,6 +27,7 @@ class ProtocolEntryContainer
     const TYPE_SECOND_OPT_IN = 'second_opt_in';
     const TYPE_FIRST_OPT_OUT = 'first_opt_out';
     const TYPE_SECOND_OPT_OUT = 'second_opt_out';
+    const TYPE_OPT_IN = 'opt_in';
     const TYPE_OPT_OUT = 'opt_out';
     const TYPE_CREATE = 'create';
     const TYPE_UPDATE = 'update';
@@ -34,9 +35,11 @@ class ProtocolEntryContainer
 
     const TYPES = [
         self::TYPE_FIRST_OPT_IN,
+        self::TYPE_FIRST_OPT_IN,
         self::TYPE_SECOND_OPT_IN,
         self::TYPE_FIRST_OPT_OUT,
         self::TYPE_SECOND_OPT_OUT,
+        self::TYPE_OPT_IN,
         self::TYPE_OPT_OUT,
         self::TYPE_CREATE,
         self::TYPE_UPDATE,
