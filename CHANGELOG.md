@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2021-08-31
+
+- Added: php8 support
+
 ## [1.3.0] - 2021-08-11
 
 - Added: option `other` in gender
