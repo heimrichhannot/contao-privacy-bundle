@@ -119,7 +119,7 @@ class ProtocolManager
         $protocolEntry->tstamp = $protocolEntry->dateAdded = time();
         $protocolEntry->pid = $archive;
         $protocolEntry->type = $type;
-        $stackTrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 4);
+        $stackTrace = debug_backtrace(\DEBUG_BACKTRACE_PROVIDE_OBJECT, 4);
         $relevantStackEntry = [];
 
         // compute stacktrace entry containing the relevant function call
@@ -277,20 +277,28 @@ class ProtocolManager
                 $instance = $modelClass::findBy([$protocolArchive->referenceFieldTable.'.'.$protocolArchive->referenceFieldForeignKey.'=?'],
                     [$protocolEntry->{$protocolArchive->referenceFieldProtocolForeignKey}]);
 
+                $dbFields = Database::getInstance()->getFieldNames($protocolArchive->referenceFieldTable);
+
                 if (null === $instance && $protocolArchive->createInstanceOnChange) {
                     $justCreated = true;
 
-                    $set['tstamp'] = $set['dateAdded'] = time();
-
-                    $dbFields = Database::getInstance()->getFieldNames($protocolArchive->referenceFieldTable);
-
-                    foreach ($data as $field => $value) {
-                        if (!\in_array($field, $dbFields)) {
-                            continue;
-                        }
-
-                        $set[$field] = $value;
+                    if (\in_array('dateAdded', $dbFields)) {
+                        $set['dateAdded'] = time();
                     }
+
+                    if (\in_array('addedOn', $dbFields)) {
+                        $set['addedOn'] = time();
+                    }
+                }
+
+                $set['tstamp'] = time();
+
+                foreach ($data as $field => $value) {
+                    if (!\in_array($field, $dbFields)) {
+                        continue;
+                    }
+
+                    $set[$field] = $value;
                 }
 
                 if (isset($GLOBALS['TL_HOOKS']['privacy_initReferenceModelOnProtocolChange']) && \is_array($GLOBALS['TL_HOOKS']['privacy_initReferenceModelOnProtocolChange'])) {

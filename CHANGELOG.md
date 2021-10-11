@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2021-08-31
+
+- Fixed: reference entity in protocol entry reader is now also updated with form data
+- Added: check for existance of `dateAdded` field in protocol entry reader
+
 ## [1.4.0] - 2021-08-31
 
 - Added: php8 support
