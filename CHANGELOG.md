@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.4.1] - 2021-08-31
+## [1.4.2] - 2021-10-11
+
+- Fixed: order issue in protocol entry reader
+
+## [1.4.1] - 2021-10-11
 
 - Fixed: reference entity in protocol entry reader is now also updated with form data
 - Added: check for existance of `dateAdded` field in protocol entry reader

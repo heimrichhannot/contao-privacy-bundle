@@ -301,6 +301,14 @@ class ProtocolManager
                     $set[$field] = $value;
                 }
 
+                if ($protocolArchive->referenceTimestampField) {
+                    $set[$protocolArchive->referenceTimestampField] = time();
+                }
+
+                if ($protocolArchive->addEntryTypeToReferenceFieldOnChange) {
+                    $set[$protocolArchive->referenceEntryTypeField] = $protocolEntry->type;
+                }
+
                 if (isset($GLOBALS['TL_HOOKS']['privacy_initReferenceModelOnProtocolChange']) && \is_array($GLOBALS['TL_HOOKS']['privacy_initReferenceModelOnProtocolChange'])) {
                     foreach ($GLOBALS['TL_HOOKS']['privacy_initReferenceModelOnProtocolChange'] as $callback) {
                         if (\is_array($callback)) {
@@ -309,14 +317,6 @@ class ProtocolManager
                             $callback($set, $protocolEntry, $data);
                         }
                     }
-                }
-
-                if ($protocolArchive->referenceTimestampField) {
-                    $set[$protocolArchive->referenceTimestampField] = time();
-                }
-
-                if ($protocolArchive->addEntryTypeToReferenceFieldOnChange) {
-                    $set[$protocolArchive->referenceEntryTypeField] = $protocolEntry->type;
                 }
 
                 // store with Database since the entity might use DC_Multilingual
