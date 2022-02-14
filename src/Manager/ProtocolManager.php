@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2021 Heimrich & Hannot GmbH
+ * Copyright (c) 2022 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -436,8 +436,10 @@ class ProtocolManager
      */
     public function getSelectorFieldDca($label = null)
     {
+        System::loadLanguageFile('default');
+
         if (!$label || !\is_string($label)) {
-            $label = $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['addPrivacyProtocolEntry'];
+            $label = &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['addPrivacyProtocolEntry'];
         }
 
         return [
@@ -452,7 +454,7 @@ class ProtocolManager
     public function getArchiveFieldDca()
     {
         return [
-            'label' => $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolEntryArchive'],
+            'label' => &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolEntryArchive'],
             'exclude' => true,
             'filter' => true,
             'inputType' => 'select',
@@ -467,7 +469,7 @@ class ProtocolManager
         System::loadLanguageFile('tl_privacy_protocol_entry');
 
         return [
-            'label' => $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolEntryType'],
+            'label' => &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolEntryType'],
             'exclude' => true,
             'filter' => true,
             'inputType' => 'select',
@@ -481,7 +483,7 @@ class ProtocolManager
     public function getDescriptionFieldDca()
     {
         return [
-            'label' => $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolEntryDescription'],
+            'label' => &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolEntryDescription'],
             'exclude' => true,
             'search' => true,
             'inputType' => 'textarea',
@@ -493,7 +495,7 @@ class ProtocolManager
     public function getFieldMappingFieldDca($tableField)
     {
         return [
-            'label' => $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolFieldMapping'],
+            'label' => &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolFieldMapping'],
             'inputType' => 'multiColumnEditor',
             'eval' => [
                 'tl_class' => 'long clr',
@@ -542,7 +544,7 @@ class ProtocolManager
     public function getTextualFieldMappingFieldDca()
     {
         return [
-            'label' => $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolFieldMapping'],
+            'label' => &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolFieldMapping'],
             'inputType' => 'multiColumnEditor',
             'eval' => [
                 'tl_class' => 'long clr',
@@ -582,7 +584,7 @@ class ProtocolManager
     public function getNotificationFieldDca()
     {
         return [
-            'label' => $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolNotification'],
+            'label' => &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolNotification'],
             'exclude' => true,
             'search' => true,
             'inputType' => 'select',
@@ -595,7 +597,7 @@ class ProtocolManager
     public function getActivationJumpToFieldDca()
     {
         return [
-            'label' => $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolActivationJumpTo'],
+            'label' => &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolActivationJumpTo'],
             'exclude' => true,
             'inputType' => 'pageTree',
             'foreignKey' => 'tl_page.title',
@@ -608,7 +610,7 @@ class ProtocolManager
     public function getConfigFieldDca()
     {
         return [
-            'label' => $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolEntryConfig'],
+            'label' => &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['privacyProtocolEntryConfig'],
             'exclude' => true,
             'filter' => true,
             'inputType' => 'select',

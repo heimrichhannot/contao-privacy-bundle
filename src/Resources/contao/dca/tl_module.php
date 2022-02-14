@@ -1,10 +1,18 @@
 <?php
 
+/*
+ * Copyright (c) 2022 Heimrich & Hannot GmbH
+ *
+ * @license LGPL-3.0-or-later
+ */
+
+\Contao\System::loadLanguageFile('default');
+
 $dca = &$GLOBALS['TL_DCA']['tl_module'];
 
 $protocolManager = System::getContainer()->get(\HeimrichHannot\PrivacyBundle\Manager\ProtocolManager::class);
 
-/**
+/*
  * Palettes
  */
 $dca['palettes'][\HeimrichHannot\PrivacyBundle\Controller\FrontendModule\ProtocolEntryEditorModuleController::TYPE] = '
@@ -16,66 +24,80 @@ $dca['palettes'][\HeimrichHannot\PrivacyBundle\Controller\FrontendModule\Protoco
     {template_legend},customTpl;
     {protected_legend},protected;{expert_legend},guests,cssID';
 
-/**
+/*
  * Subpalettes
  */
-$dca['palettes']['__selector__'][]                                                            = 'privacyAddReferenceEntity';
-$dca['palettes']['__selector__'][]                                                            = 'privacyDeleteReferenceEntityAfterOptAction';
-$dca['palettes']['__selector__'][]                                                            = 'addOptOutDeletePrivacyProtocolEntry';
-$dca['subpalettes']['privacyAddReferenceEntity']                                              = 'privacyUpdateReferenceEntityFields,privacyDeleteReferenceEntityAfterOptAction';
-$dca['subpalettes']['privacyDeleteReferenceEntityAfterOptAction']                             = 'addOptOutDeletePrivacyProtocolEntry';
-$dca['subpalettes']['addOptOutDeletePrivacyProtocolEntry']                                    = 'optOutDeletePrivacyProtocolArchive,optOutDeletePrivacyProtocolEntryType,optOutDeletePrivacyProtocolDescription';
+$dca['palettes']['__selector__'][] = 'privacyAddReferenceEntity';
+$dca['palettes']['__selector__'][] = 'privacyDeleteReferenceEntityAfterOptAction';
+$dca['palettes']['__selector__'][] = 'addOptOutDeletePrivacyProtocolEntry';
+$dca['subpalettes']['privacyAddReferenceEntity'] = 'privacyUpdateReferenceEntityFields,privacyDeleteReferenceEntityAfterOptAction';
+$dca['subpalettes']['privacyDeleteReferenceEntityAfterOptAction'] = 'addOptOutDeletePrivacyProtocolEntry';
+$dca['subpalettes']['addOptOutDeletePrivacyProtocolEntry'] = 'optOutDeletePrivacyProtocolArchive,optOutDeletePrivacyProtocolEntryType,optOutDeletePrivacyProtocolDescription';
 
 /**
- * Fields
+ * Fields.
  */
 $fields = [
     'privacyRestrictToJwt' => [
-        'label'                   => &$GLOBALS['TL_LANG']['tl_module']['privacyRestrictToJwt'],
-        'exclude'                 => true,
-        'inputType'               => 'checkbox',
-        'eval'                    => ['tl_class' => 'w50'],
-        'sql'                     => "char(1) NOT NULL default ''"
+        'label' => &$GLOBALS['TL_LANG']['tl_module']['privacyRestrictToJwt'],
+        'exclude' => true,
+        'inputType' => 'checkbox',
+        'eval' => ['tl_class' => 'w50'],
+        'sql' => "char(1) NOT NULL default ''",
     ],
     'privacyAutoSubmit' => [
-        'label'                   => &$GLOBALS['TL_LANG']['tl_module']['privacyAutoSubmit'],
-        'exclude'                 => true,
-        'inputType'               => 'checkbox',
-        'eval'                    => ['tl_class' => 'w50'],
-        'sql'                     => "char(1) NOT NULL default ''"
-    ],
-    'privacyAddReferenceEntity'               => [
-        'label'     => &$GLOBALS['TL_LANG']['tl_module']['privacyAddReferenceEntity'],
-        'exclude'   => true,
+        'label' => &$GLOBALS['TL_LANG']['tl_module']['privacyAutoSubmit'],
+        'exclude' => true,
         'inputType' => 'checkbox',
-        'eval'      => ['tl_class' => 'w50', 'submitOnChange' => true],
-        'sql'       => "char(1) NOT NULL default ''"
+        'eval' => ['tl_class' => 'w50'],
+        'sql' => "char(1) NOT NULL default ''",
+    ],
+    'privacyAddReferenceEntity' => [
+        'label' => &$GLOBALS['TL_LANG']['tl_module']['privacyAddReferenceEntity'],
+        'exclude' => true,
+        'inputType' => 'checkbox',
+        'eval' => ['tl_class' => 'w50', 'submitOnChange' => true],
+        'sql' => "char(1) NOT NULL default ''",
     ],
     'privacyUpdateReferenceEntityFields' => [
-        'label'                   => &$GLOBALS['TL_LANG']['tl_module']['privacyUpdateReferenceEntityFields'],
-        'exclude'                 => true,
-        'inputType'               => 'checkbox',
-        'eval'                    => ['tl_class' => 'w50'],
-        'sql'                     => "char(1) NOT NULL default ''"
+        'label' => &$GLOBALS['TL_LANG']['tl_module']['privacyUpdateReferenceEntityFields'],
+        'exclude' => true,
+        'inputType' => 'checkbox',
+        'eval' => ['tl_class' => 'w50'],
+        'sql' => "char(1) NOT NULL default ''",
     ],
     'privacyDeleteReferenceEntityAfterOptAction' => [
-        'label'                   => &$GLOBALS['TL_LANG']['tl_module']['privacyDeleteReferenceEntityAfterOptAction'],
-        'exclude'                 => true,
-        'inputType'               => 'checkbox',
-        'eval'                    => ['tl_class' => 'w50', 'submitOnChange' => true],
-        'sql'                     => "char(1) NOT NULL default ''"
+        'label' => &$GLOBALS['TL_LANG']['tl_module']['privacyDeleteReferenceEntityAfterOptAction'],
+        'exclude' => true,
+        'inputType' => 'checkbox',
+        'eval' => ['tl_class' => 'w50', 'submitOnChange' => true],
+        'sql' => "char(1) NOT NULL default ''",
     ],
-    'addOptOutDeletePrivacyProtocolEntry'     => $protocolManager->getSelectorFieldDca(),
-    'optOutDeletePrivacyProtocolArchive'      => $protocolManager->getArchiveFieldDca(),
-    'optOutDeletePrivacyProtocolEntryType'    => $protocolManager->getTypeFieldDca(),
-    'optOutDeletePrivacyProtocolDescription'  => $protocolManager->getDescriptionFieldDca(),
-    'optOutDeletePrivacyProtocolFieldMapping' => $protocolManager->getFieldMappingFieldDca('formHybridDataContainer')
+    'addOptOutDeletePrivacyProtocolEntry' => $protocolManager->getSelectorFieldDca(),
+    'optOutDeletePrivacyProtocolArchive' => $protocolManager->getArchiveFieldDca(),
+    'optOutDeletePrivacyProtocolEntryType' => $protocolManager->getTypeFieldDca(),
+    'optOutDeletePrivacyProtocolDescription' => $protocolManager->getDescriptionFieldDca(),
+    'optOutDeletePrivacyProtocolFieldMapping' => $protocolManager->getFieldMappingFieldDca('formHybridDataContainer'),
 ];
 
-$fields['addOptOutDeletePrivacyProtocolEntry']['label'][0]     .= ' (' . $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['afterDelete'] . ')';
-$fields['optOutDeletePrivacyProtocolArchive']['label'][0]      .= ' (' . $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['afterDelete'] . ')';
-$fields['optOutDeletePrivacyProtocolEntryType']['label'][0]    .= ' (' . $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['afterDelete'] . ')';
-$fields['optOutDeletePrivacyProtocolDescription']['label'][0]  .= ' (' . $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['afterDelete'] . ')';
-$fields['optOutDeletePrivacyProtocolFieldMapping']['label'][0] .= ' (' . $GLOBALS['TL_LANG']['MSC']['huhPrivacy']['afterDelete'] . ')';
+if (isset($fields['addOptOutDeletePrivacyProtocolEntry']['label'][0])) {
+    $fields['addOptOutDeletePrivacyProtocolEntry']['label'][0] .= ' ('.($GLOBALS['TL_LANG']['MSC']['huhPrivacy']['afterDelete'] ?? null).')';
+}
+
+if (isset($fields['optOutDeletePrivacyProtocolArchive']['label'][0])) {
+    $fields['optOutDeletePrivacyProtocolArchive']['label'][0] .= ' ('.($GLOBALS['TL_LANG']['MSC']['huhPrivacy']['afterDelete'] ?? null).')';
+}
+
+if (isset($fields['optOutDeletePrivacyProtocolEntryType']['label'][0])) {
+    $fields['optOutDeletePrivacyProtocolEntryType']['label'][0] .= ' ('.($GLOBALS['TL_LANG']['MSC']['huhPrivacy']['afterDelete'] ?? null).')';
+}
+
+if (isset($fields['optOutDeletePrivacyProtocolDescription']['label'][0])) {
+    $fields['optOutDeletePrivacyProtocolDescription']['label'][0] .= ' ('.($GLOBALS['TL_LANG']['MSC']['huhPrivacy']['afterDelete'] ?? null).')';
+}
+
+if (isset($fields['optOutDeletePrivacyProtocolFieldMapping']['label'][0])) {
+    $fields['optOutDeletePrivacyProtocolFieldMapping']['label'][0] .= ' ('.($GLOBALS['TL_LANG']['MSC']['huhPrivacy']['afterDelete'] ?? null).')';
+}
 
 $dca['fields'] = array_merge(is_array($dca['fields']) ? $dca['fields'] : [], $fields);

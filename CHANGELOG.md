@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.3] - 2022-02-14
+
+- Fixed: array index issues in php 8+
+
 ## [1.4.2] - 2021-10-11
 
 - Fixed: order issue in protocol entry reader
