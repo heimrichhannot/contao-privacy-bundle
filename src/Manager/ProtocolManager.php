@@ -436,19 +436,20 @@ class ProtocolManager
      */
     public function getSelectorFieldDca($label = null)
     {
-        System::loadLanguageFile('default');
-
-        if (!$label || !\is_string($label)) {
-            $label = &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['addPrivacyProtocolEntry'];
-        }
-
-        return [
-            'label' => $label,
+        $data = [
+            'label' => &$GLOBALS['TL_LANG']['MSC']['huhPrivacy']['addPrivacyProtocolEntry'],
             'exclude' => true,
             'inputType' => 'checkbox',
             'eval' => ['tl_class' => 'w50 clr', 'submitOnChange' => true],
             'sql' => "char(1) NOT NULL default ''",
         ];
+
+        if ($label && \is_string($label)) {
+            unset($data['label']);
+            $data['label'] = $label;
+        }
+
+        return $data;
     }
 
     public function getArchiveFieldDca()
