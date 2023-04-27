@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2022 Heimrich & Hannot GmbH
+ * Copyright (c) 2023 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -175,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_privacy_protocol_archive'] = [
             'filter' => true,
             'inputType' => 'select',
             'options_callback' => function (Contao\DataContainer $dc) {
-                if (!($table = $dc->activeRecord->referenceFieldTable)) {
+                if (!($dc->activeRecord && ($table = $dc->activeRecord->referenceFieldTable))) {
                     return [];
                 }
 
@@ -198,7 +198,7 @@ $GLOBALS['TL_DCA']['tl_privacy_protocol_archive'] = [
             'filter' => true,
             'inputType' => 'select',
             'options_callback' => function (Contao\DataContainer $dc) {
-                if (!($table = $dc->activeRecord->referenceFieldTable)) {
+                if (!($dc->activeRecord && ($table = $dc->activeRecord->referenceFieldTable))) {
                     return [];
                 }
 
@@ -227,7 +227,7 @@ $GLOBALS['TL_DCA']['tl_privacy_protocol_archive'] = [
             'filter' => true,
             'inputType' => 'select',
             'options_callback' => function (Contao\DataContainer $dc) {
-                if (!($table = $dc->activeRecord->referenceFieldTable)) {
+                if (!($dc->activeRecord && ($table = $dc->activeRecord->referenceFieldTable))) {
                     return [];
                 }
 
