@@ -12,6 +12,7 @@ use Contao\Config;
 use Contao\Controller;
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\Environment;
+use Contao\Input;
 use Contao\Message;
 use Contao\RequestToken;
 use Contao\StringUtil;
@@ -19,9 +20,10 @@ use Contao\System;
 use Contao\Validator;
 use Contao\Widget;
 use HeimrichHannot\NotificationCenterPlus\MessageModel;
-use HeimrichHannot\RequestBundle\Component\HttpFoundation\Request;
 use HeimrichHannot\UtilsBundle\Salutation\SalutationUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment as TwigEnvironment;
@@ -34,47 +36,32 @@ use Twig\Environment as TwigEnvironment;
  */
 class BackendOptInModuleController extends AbstractController
 {
-    /**
-     * @var ContaoFramework
-     */
-    protected $framework;
+    protected ContaoFramework $framework;
 
-    /**
-     * @var Request
-     */
-    protected $request;
+    protected SalutationUtil $salutationUtil;
 
-    /**
-     * @var SalutationUtil
-     */
-    protected $salutationUtil;
+    private TwigEnvironment $twig;
 
-    /**
-     * @var TwigEnvironment
-     */
-    private $twig;
-
-    public function __construct(TwigEnvironment $twig, ContaoFramework $framework, Request $request, SalutationUtil $salutationUtil)
+    public function __construct(TwigEnvironment $twig, ContaoFramework $framework, SalutationUtil $salutationUtil)
     {
         $this->twig = $twig;
         $this->framework = $framework;
-        $this->request = $request;
         $this->salutationUtil = $salutationUtil;
     }
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
         $this->framework->getAdapter(Controller::class)->loadDataContainer('tl_privacy_backend');
         $this->framework->getAdapter(System::class)->loadLanguageFile('tl_privacy_backend');
         $this->framework->getAdapter(System::class)->loadLanguageFile('default');
 
-        if ('tl_privacy_backend' === $this->request->getPost('FORM_SUBMIT')) {
-            if ($email = $this->request->getPost('email')) {
+        if ('tl_privacy_backend' === $request->request->get('FORM_SUBMIT')) {
+            if ($email = $request->request->get('email')) {
                 if (!Validator::isEmail($email)) {
                     Message::addError(sprintf($GLOBALS['TL_LANG']['tl_privacy_backend']['invalidEmail'], $email));
                     Controller::reload();
                 } else {
-                    $this->sendEmail();
+                    $this->sendEmail($request);
                 }
             }
         }
@@ -92,13 +79,13 @@ class BackendOptInModuleController extends AbstractController
 
         // add fields
         $fields = [];
-        $lang = $this->request->getPost('language') ?: ($GLOBALS['TL_LANGUAGE'] ?: 'de');
+        $lang = $request->request->get('language') ?: ($GLOBALS['TL_LANGUAGE'] ?: 'de');
 
         foreach ($dca['fields'] as $field => $data) {
             switch ($field) {
                 case 'language':
-                    $widget = $this->getBackendFormField($field, $data, $lang);
 
+                    $widget = $this->getBackendFormField($field, $data, $lang);
                     break;
 
                 default:
@@ -132,10 +119,14 @@ class BackendOptInModuleController extends AbstractController
         return new $class(Widget::getAttributesFromDca($dca, $field, $value));
     }
 
-    protected function sendEmail()
+    protected function sendEmail(Request $request)
     {
+        $lang = $request->request->get('language');
+        if (!Validator::isLanguage($lang)) {
+            $lang = $GLOBALS['TL_LANGUAGE'] ?: 'de';
+        }
+
         $dca = &$GLOBALS['TL_DCA']['tl_privacy_backend'];
-        $lang = $this->request->getPost('language') ?: ($GLOBALS['TL_LANGUAGE'] ?: 'de');
         $backendConfig = StringUtil::deserialize(Config::get('privacyOptInNotifications'), true);
         $notification = null;
         $jumpTo = null;
@@ -167,8 +158,8 @@ class BackendOptInModuleController extends AbstractController
             $data = [];
             $dataForInsertTag = [];
 
-            foreach ($this->request->request as $field => $value) {
-                $tokens['form_'.$field] = $value;
+            foreach ($request->request->all() as $field => $value) {
+                $tokens['form_'.$field] = Input::get($field);
 
                 if (!isset($dca['fields'][$field]['eval']['skipForJwtToken']) || !$dca['fields'][$field]['eval']['skipForJwtToken']) {
                     $data[$field] = $value;

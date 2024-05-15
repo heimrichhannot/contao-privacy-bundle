@@ -12,6 +12,7 @@ use Contao\Controller;
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
+use Contao\Input;
 use Contao\ModuleModel;
 use Contao\System;
 use Contao\Template;
@@ -29,36 +30,23 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ProtocolEntryEditorModuleController extends AbstractFrontendModuleController
 {
-    const TYPE = 'protocol_entry_editor';
+    public const TYPE = 'protocol_entry_editor';
 
-    /**
-     * @var ModelUtil
-     */
-    protected $modelUtil;
+    protected ModelUtil $modelUtil;
 
-    /**
-     * @var \HeimrichHannot\RequestBundle\Component\HttpFoundation\Request
-     */
-    protected $request;
-
-    /**
-     * @var ContaoFramework
-     */
-    protected $framework;
+    protected ContaoFramework $framework;
 
     public function __construct(
         ModelUtil $modelUtil,
-        ContaoFramework $framework,
-        \HeimrichHannot\RequestBundle\Component\HttpFoundation\Request $request
+        ContaoFramework $framework
     ) {
         $this->modelUtil = $modelUtil;
-        $this->request = $request;
         $this->framework = $framework;
     }
 
     protected function getResponse(Template $template, ModuleModel $module, Request $request): ?Response
     {
-        $decoded = $this->getDataFromJwtToken($module);
+        $decoded = $this->getDataFromJwtToken($module, $request);
 
         if ($module->privacyAutoSubmit) {
             $formId = FormHelper::getFormId($module->formHybridDataContainer, $module->id);
@@ -68,7 +56,7 @@ class ProtocolEntryEditorModuleController extends AbstractFrontendModuleControll
             }
 
             // TODO replace by request bundle after formhybrid bundle creation
-            \HeimrichHannot\Request\Request::setPost('FORM_SUBMIT', $formId);
+            Input::setPost('FORM_SUBMIT', $formId);
         }
 
         if (\is_array($decoded)) {
@@ -83,9 +71,9 @@ class ProtocolEntryEditorModuleController extends AbstractFrontendModuleControll
         return $template->getResponse();
     }
 
-    protected function getDataFromJwtToken(ModuleModel $module)
+    protected function getDataFromJwtToken(ModuleModel $module, Request $request)
     {
-        if (!($token = $this->request->getGet(HeimrichHannotPrivacyBundle::OPT_IN_OUT_TOKEN_PARAM)) || !$this->request->getGet(HeimrichHannotPrivacyBundle::OPT_ACTION_PARAM)) {
+        if (!($token = $request->query->get(HeimrichHannotPrivacyBundle::OPT_IN_OUT_TOKEN_PARAM)) || !$request->query->has(HeimrichHannotPrivacyBundle::OPT_ACTION_PARAM)) {
             if ($module->privacyRestrictToJwt) {
                 StatusMessage::addError($GLOBALS['TL_LANG']['MSC']['huhPrivacy']['messageNoJwtToken'], $module->id);
             }
@@ -121,7 +109,7 @@ class ProtocolEntryEditorModuleController extends AbstractFrontendModuleControll
 
         foreach ($decoded['data'] as $field => $value) {
             if ($module->privacyAutoSubmit) {
-                \HeimrichHannot\Request\Request::setPost($field, $value);
+                Input::setPost($field, $value);
             } else {
                 $dca['fields'][$field]['default'] = $value;
             }

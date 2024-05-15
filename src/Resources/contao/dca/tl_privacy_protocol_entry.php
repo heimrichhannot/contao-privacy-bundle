@@ -202,8 +202,8 @@ $GLOBALS['TL_DCA']['tl_privacy_protocol_entry'] = [
             'exclude' => true,
             'search' => true,
             'inputType' => 'text',
-            'eval' => ['maxlength' => 32, 'tl_class' => 'w50'],
-            'sql' => "varchar(32) NOT NULL default ''",
+            'eval' => ['maxlength' => 64, 'tl_class' => 'w50'],
+            'sql' => "varchar(64) NOT NULL default ''",
         ],
         'dataContainer' => [
             'label' => &$GLOBALS['TL_LANG']['tl_privacy_protocol_entry']['dataContainer'],
