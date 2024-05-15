@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2024-05-15
+- Changed: removed usage of request bundle
+- Changed: raised minimum php version to 7.4
+- Fixed: bundleVersion database field length to short for long version strings (e.g. long branch names)
+
 ## [1.4.5] - 2022-04-27
 - Fixed: warnings
 
