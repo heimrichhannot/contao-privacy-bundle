@@ -1,5 +1,8 @@
 # Contao Privacy Bundle
 
+> This bundle is deprecated. 
+> Please migration to it's successor [contoa-privacy-protocol-bundle](https://github.com/heimrichhannot/contao-privacy-protocol-bundle).
+
 This bundle contains functionality concerning privacy and the European Union's "General Data Protection Regulation" (
 GDPR, in German: "Datenschutz-Grundverordnung", DSGVO).
 
